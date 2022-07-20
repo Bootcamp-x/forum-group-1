@@ -43,7 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/discussion" element={<Discussion />} />
+          <Route path="/discussion/:id" element={<Discussion />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
@@ -51,7 +51,6 @@ function App() {
 }
 function LoginState() {
   let username = JSON.parse(localStorage.getItem("username") || "{}");
-  console.log(username.username);
   if (username.username == null) {
     return (
       <Link href="/login" {...linkStyles}>

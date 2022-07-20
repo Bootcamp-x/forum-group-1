@@ -37,7 +37,7 @@ function Home() {
 function Discussions({ discussions }) {
   return discussions.map((d, index) => (
     <ListItem {...ListItemStyles} key={index}>
-      <Link to={`/${d.id}`} {...HeadingStyles}>
+      <Link to={`/discussion/${d.id}`} {...HeadingStyles}>
         {d.title}
       </Link>
       <Text {...TextStyles}>{`by ${d.username} ${new Date(

@@ -17,15 +17,16 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+
 import React from "react";
 import AppContext from "../components/AppContext";
 
 function Discussion() {
+  let { id } = useParams();
+  console.log(id);
   return (
-    <Container
-    width="60%"
-    backgroundColor="white"
-    >
+    <Container width="60%" backgroundColor="white">
       <Heading>CUALQUIER COSA</Heading>
       <Text>YO LO VOY A REEMPLAZAR</Text>
       <Text>-- -------------- - --------- -----------------</Text>
@@ -45,8 +46,7 @@ function Discussion() {
           boxShadow: "none",
         }}
       />
-      <Button
-      width="100%">REPLY</Button>
+      <Button width="100%">REPLY</Button>
     </Container>
   );
 }

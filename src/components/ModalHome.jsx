@@ -36,7 +36,8 @@ function ModalHome() {
           let username = localStorage.getItem("username");
           username = "userasdasd";
           let date = new Date().toISOString();
-          let discussion = { username, title, body, date };
+          let id = new Date().toDateString();
+          let discussion = { username, title, body, date, id };
           setDiscussions((state) => {
             const newState = [...state, discussion];
             localStorage.setItem("discussions", JSON.stringify(newState));
