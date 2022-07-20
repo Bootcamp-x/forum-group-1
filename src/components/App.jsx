@@ -1,4 +1,7 @@
 import { Box, ChakraProvider, Heading, Link } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
 import theme from "./Theme";
 
 const linkStyles = {
@@ -30,10 +33,12 @@ function App() {
         </Box>
       </Box>
       {/* end navbar component */}
-
-      <Box maxW="920px" margin="auto">
-        <Heading>Welcome to Chaos</Heading>
-      </Box>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
