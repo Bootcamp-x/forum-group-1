@@ -1,10 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 
 function Login() {
   return (
     <Box>
-      <Heading>Welcome to Chaos</Heading>
+      <Heading>Login1233333333333333333</Heading>
     </Box>
   );
 }
