@@ -33,10 +33,9 @@ function ModalHome() {
     <AppContext.Consumer>
       {({ setDiscussions }) => {
         const createDiscussion = () => {
-          let username = localStorage.getItem("username");
-          username = "userasdasd";
+          let username = JSON.parse(localStorage.getItem("username")).username;
           let date = new Date().toISOString();
-          let id = new Date().toDateString();
+          let id = new Date().toString();
           let discussion = { username, title, body, date, id };
           setDiscussions((state) => {
             const newState = [...state, discussion];

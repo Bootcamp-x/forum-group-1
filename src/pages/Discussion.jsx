@@ -24,16 +24,19 @@ import AppContext from "../components/AppContext";
 
 function Discussion() {
   let { id } = useParams();
-  console.log(id);
+  let discussions = JSON.parse(localStorage.getItem("discussions") || "[]");
+  let discussion = discussions.find((d) => d.id == id);
+
   return (
     <Container width="60%" backgroundColor="white">
-      <Heading>CUALQUIER COSA</Heading>
-      <Text>YO LO VOY A REEMPLAZAR</Text>
-      <Text>-- -------------- - --------- -----------------</Text>
+      <Heading>{discussion.title}</Heading>
+      <Text>{discussion.username + " - " + discussion.date}</Text>
+      <Text>{discussion.body}</Text>
+      <Text>-------------------------------------------</Text>
       <Textarea
         padding={"0.5rem"}
         height="91.6px"
-        placeholder="Body title"
+        placeholder="Write reply"
         resize={"none"}
         _active={{
           outline: "rgba(255, 102, 0, 0.5);",
