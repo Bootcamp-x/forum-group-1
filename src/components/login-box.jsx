@@ -9,14 +9,30 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Link,
+  color,
+  border,
 } from '@chakra-ui/react'
 import { Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 function LoginBox() {
+const [username,setUsername] = React.useState("");
+const [email,setEmail] = React.useState("");
+const setUsernameLogin = (e) => {
+  setUsername(e.target.value);
+};
+const setEmailLogin = (e) => {
+  setEmail(e.target.value);
+};
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const createUser = (e) => {
+      e.preventDefault();
+      let user = { username, email };
+      localStorage.setItem("username", JSON.stringify(user));
+      window.location = "/";
+    };
 
   return (
     <>
@@ -46,13 +62,17 @@ function LoginBox() {
             <FormControl
             margin="16px 0px "
             maxWidth="297px">
-              <Input ref={initialRef} placeholder='Enter your username' />
+              <Input
+              onInput={setUsernameLogin}
+              placeholder='Enter your username' />
             </FormControl>
 
             <FormControl
             margin="16px 0px"
             maxWidth="297px">
-              <Input placeholder='Enter your email' />
+              <Input
+              onInput={setEmailLogin}
+              placeholder='Enter your email' />
             </FormControl>
           </ModalBody>
 
@@ -61,15 +81,28 @@ function LoginBox() {
           padding="0"
           margin="16px 15px 20px 15px"
           >
-            <Button
+            <Link
+            display="flex"
+            justifyContent="center"
+            textDecoration="none"
             backgroundColor="#ff6600"
             color="white"
             cursor="pointer"
             padding="0.75rem 0px"
             width="100%"
+            borderRadius="0.25rem"
+            border="1px solid #ff6600"
+            transition="0.2s"
+            _hover={{
+              textDecoration:"none",
+              color:"orange",
+              backgroundColor:"white",
+              border:"1px solid #ff6600"
+            }}
+            onClick={createUser}
             >
               ENTER
-            </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>
