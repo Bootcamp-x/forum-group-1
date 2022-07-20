@@ -1,41 +1,31 @@
-import { Box, ChakraProvider, Heading, Link } from "@chakra-ui/react";
+import { Box, ChakraProvider, Heading, Link, Switch} from "@chakra-ui/react";
 import theme from "./Theme";
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import Navbar from "./Navbar";
 
-const linkStyles = {
-  color: "#ffffffcc",
-  transition: "color 0.15s",
-  lineHeight: "24px",
-  _hover: { color: "#ffffff" },
-};
-
+function Discussion() {
+  const { id } = useParams();
+  return (
+    <Box color={"red"} maxW="920px" margin="auto" fontSize={"20px"}>
+      Hola {id}
+    </Box>
+  );
+}
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      {/* move this to navbar component */}
-      <Box as="nav" background="#ff6600" p="16px" mb="32px" width="100%">
-        <Box
-          color="white"
-          display="flex"
-          margin="auto"
-          maxW="920px"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Link href="/" {...linkStyles}>
-            Chaos news
-          </Link>
-          <Link href="/login" {...linkStyles}>
-            Login
-          </Link>
-        </Box>
-      </Box>
-      {/* end navbar component */}
-
-      <Box maxW="920px" margin="auto">
-        <Heading>Welcome to Chaos</Heading>
-      </Box>
+      <BrowserRouter>
+        <Navbar />
+         {/* cosas dinamicas  */}
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/discussion/:id" element={<Discussion />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
-
 export default App;
