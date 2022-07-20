@@ -58,7 +58,6 @@ function LoginBox() {
 
           <ModalFooter
           display="flex"
-          margin="32px 16px"
           padding="0"
           margin="16px 15px 20px 15px"
           >
