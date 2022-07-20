@@ -31,10 +31,13 @@ function ModalHome() {
 
   return (
     <AppContext.Consumer>
-      {(value) => {
+      {({ setDiscussions }) => {
         const createDiscussion = () => {
-          let discussion = { title, body };
-          value.setDiscussions((state) => {
+          let username = localStorage.getItem("username");
+          username = "userasdasd";
+          let date = new Date().toISOString();
+          let discussion = { username, title, body, date };
+          setDiscussions((state) => {
             const newState = [...state, discussion];
             localStorage.setItem("discussions", JSON.stringify(newState));
             return newState;
@@ -42,26 +45,9 @@ function ModalHome() {
         };
         return (
           <>
-            <Button
-              color="white"
-              backgroundColor={"rgb(255, 102, 0)"}
-              height={"55px"}
-              width="55px"
-              borderRadius={"50%"}
-              fontSize="35px"
-              fontFamily={"Arial"}
-              fontWeight="normal"
-              position={"fixed"}
-              bottom="25px"
-              right={"25px"}
-              onClick={onOpen}
-            >
+            <Button {...AddButtonStyles} onClick={onOpen}>
               +
             </Button>
-            {/* <Button ml={4} ref={finalRef}>
-              I'll receive focus on close
-            </Button> */}
-
             <Modal
               initialFocusRef={initialRef}
               finalFocusRef={finalRef}
@@ -93,16 +79,7 @@ function ModalHome() {
                       padding={"0.5rem"}
                       ref={initialRef}
                       placeholder="Discussion title"
-                      _active={{
-                        outline: "rgba(255, 102, 0, 0.5);",
-                        borderColor: "rgba(255, 102, 0, 0.5);",
-                        boxShadow: "none",
-                      }}
-                      _focus={{
-                        outline: "rgba(255, 102, 0, 0.5);",
-                        borderColor: "rgba(255, 102, 0, 0.5);",
-                        boxShadow: "none",
-                      }}
+                      {...InputBorderStyles}
                     />
                   </FormControl>
 
@@ -113,36 +90,15 @@ function ModalHome() {
                       height="91.6px"
                       placeholder="Body title"
                       resize={"none"}
-                      _active={{
-                        outline: "rgba(255, 102, 0, 0.5);",
-                        borderColor: "rgba(255, 102, 0, 0.5);",
-                        boxShadow: "none",
-                      }}
-                      _focus={{
-                        outline: "rgba(255, 102, 0, 0.5);",
-                        borderColor: "rgba(255, 102, 0, 0.5);",
-                        boxShadow: "none",
-                      }}
+                      {...InputBorderStyles}
                     />
                   </FormControl>
                 </ModalBody>
 
                 <ModalFooter padding={"0"}>
-                  <Button
-                    backgroundColor="rgb(255, 102, 0)"
-                    mr={3}
-                    minW="450px"
-                    margin="0"
-                    borderRadius={"0.25rem"}
-                    color="white"
-                    fontWeight="normal"
-                    fontSize={"12.8px"}
-                    fontFamily="Arial"
-                    onClick={createDiscussion}
-                  >
+                  <Button {...CreateButtonStyles} onClick={createDiscussion}>
                     CREATE EMPLOYEE
                   </Button>
-                  {/* <Button onClick={onClose}>Cancel</Button> */}
                 </ModalFooter>
               </ModalContent>
             </Modal>
@@ -152,4 +108,40 @@ function ModalHome() {
     </AppContext.Consumer>
   );
 }
+const AddButtonStyles = {
+  color: "white",
+  backgroundColor: "rgb(255, 102, 0)",
+  height: "55px",
+  width: "55px",
+  borderRadius: "50%",
+  fontSize: "35px",
+  fontFamily: "Arial",
+  fontWeight: "normal",
+  position: "fixed",
+  bottom: "25px",
+  right: "25px",
+};
+
+const CreateButtonStyles = {
+  backgroundColor: "rgb(255, 102, 0)",
+  minW: "450px",
+  margin: "0",
+  borderRadius: "0.25rem",
+  color: "white",
+  fontWeight: "normal",
+  fontSize: "12.8px",
+  fontFamily: "Arial",
+};
+const InputBorderStyles = {
+  _active: {
+    outline: "rgba(255, 102, 0, 0.5);",
+    borderColor: "rgba(255, 102, 0, 0.5);",
+    boxShadow: "none",
+  },
+  _focus: {
+    outline: "rgba(255, 102, 0, 0.5);",
+    borderColor: "rgba(255, 102, 0, 0.5);",
+    boxShadow: "none",
+  },
+};
 export default ModalHome;
