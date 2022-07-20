@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import theme from "./Theme";
+import Discussion from "../pages/Discussion";
 
 const linkStyles = {
   color: "#ffffffcc",
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/discussion" element={<Discussion />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
