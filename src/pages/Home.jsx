@@ -14,6 +14,9 @@ import AppContext from "../components/AppContext";
 import ModalHome from "../components/ModalHome";
 
 function Home() {
+  if (!localStorage.getItem("username")) {
+    window.location = "/login";
+  }
   const [discussions, setDiscussions] = React.useState(
     JSON.parse(localStorage.getItem("discussions") || "[]")
   );

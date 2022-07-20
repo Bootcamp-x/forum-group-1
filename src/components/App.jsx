@@ -12,6 +12,8 @@ const linkStyles = {
 };
 
 function App() {
+  let username = JSON.parse(localStorage.getItem("username") || "{}");
+
   return (
     <ChakraProvider theme={theme}>
       {/* move this to navbar component */}
@@ -27,9 +29,12 @@ function App() {
           <Link href="/" {...linkStyles}>
             Chaos news
           </Link>
-          <Link href="/login" {...linkStyles}>
-            Login
-          </Link>
+          <Box>
+            <Link {...linkStyles} marginRight="10px">
+              {username.username}{" "}
+            </Link>
+            <LoginState></LoginState>
+          </Box>
         </Box>
       </Box>
       {/* end navbar component */}
@@ -42,5 +47,25 @@ function App() {
     </ChakraProvider>
   );
 }
+function LoginState() {
+  let username = JSON.parse(localStorage.getItem("username") || "{}");
+  console.log(username.username);
+  if (username.username == null) {
+    return (
+      <Link href="/login" {...linkStyles}>
+        Login
+      </Link>
+    );
+  } else {
+    return (
+      <Link href="/login" {...linkStyles} onClick={Logout}>
+        Logout
+      </Link>
+    );
+  }
+}
 
+function Logout() {
+  localStorage.removeItem("username");
+}
 export default App;

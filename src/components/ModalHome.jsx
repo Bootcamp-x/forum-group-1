@@ -42,6 +42,7 @@ function ModalHome() {
             localStorage.setItem("discussions", JSON.stringify(newState));
             return newState;
           });
+          onClose();
         };
         return (
           <>
