@@ -36,7 +36,7 @@ function ModalHome() {
           let username = JSON.parse(localStorage.getItem("username")).username;
           let date = new Date().toISOString();
           let id = new Date().toString();
-          let discussion = { username, title, body, date, id };
+          let discussion = { username, title, body, date, id, responses: [] };
           setDiscussions((state) => {
             const newState = [...state, discussion];
             localStorage.setItem("discussions", JSON.stringify(newState));
@@ -108,6 +108,18 @@ function ModalHome() {
       }}
     </AppContext.Consumer>
   );
+}
+function Discussions({ discussions }) {
+  return discussions.map((d, index) => (
+    <ListItem {...ListItemStyles} key={index}>
+      <Link to={`/discussion/${d.id}`} {...HeadingStyles}>
+        {d.title}
+      </Link>
+      <Text {...TextStyles}>{`by ${d.username} ${new Date(
+        d.date
+      ).toLocaleDateString()}| 1 comments`}</Text>
+    </ListItem>
+  ));
 }
 const AddButtonStyles = {
   color: "white",

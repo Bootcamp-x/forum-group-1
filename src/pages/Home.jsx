@@ -10,28 +10,28 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React from "react";
-import AppContext from "../components/AppContext";
 import ModalHome from "../components/ModalHome";
+import AppContext from "../components/AppContext";
 
 function Home() {
   if (!localStorage.getItem("username")) {
     window.location = "/login";
   }
-  const [discussions, setDiscussions] = React.useState(
-    JSON.parse(localStorage.getItem("discussions") || "[]")
-  );
-
   return (
-    <Box>
-      <Container maxW="60%" bg="white" padding={"0"}>
-        <OrderedList width={"100%"} padding="0" margin="0">
-          <Discussions discussions={discussions}></Discussions>
-        </OrderedList>
-      </Container>
-      <AppContext.Provider value={{ setDiscussions }}>
-        <ModalHome></ModalHome>
-      </AppContext.Provider>
-    </Box>
+    <AppContext.Consumer>
+      {({ discussions }) => {
+        return (
+          <Box>
+            <Container maxW="60%" bg="white" padding={"0"}>
+              <OrderedList width={"100%"} padding="0" margin="0">
+                <Discussions discussions={discussions}></Discussions>
+              </OrderedList>
+            </Container>
+            <ModalHome></ModalHome>
+          </Box>
+        );
+      }}
+    </AppContext.Consumer>
   );
 }
 function Discussions({ discussions }) {
